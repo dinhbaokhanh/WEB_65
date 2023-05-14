@@ -1,0 +1,13 @@
+.todo_item {
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f4f6f7;
+    margin-bottom: 5px;
+}
+
+.checked {
+    text-decoration: line-through;
+}

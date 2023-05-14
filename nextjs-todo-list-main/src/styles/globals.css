@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: unset;
+}
+
+.main_layout {
+    background: linear-gradient(217deg, #FFD0A0,
+            rgba(255, 0, 0, 0) 70.71%),
+        linear-gradient(127deg, #FF3D6F,
+            rgba(0, 255, 0, 0) 70.71%),
+        linear-gradient(336deg, #4AA5FB,
+            rgba(0, 0, 255, 0) 70.71%);
+    width: 100vw;
+    min-height: 100vh;
+}

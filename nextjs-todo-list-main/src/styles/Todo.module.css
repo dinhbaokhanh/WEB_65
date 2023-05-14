@@ -1,0 +1,50 @@
+.todo_layout {
+    width: 50vw;
+    margin: auto;
+    padding: 15px;
+    margin-top: 15%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.todo_layout form {
+    display: flex;
+    gap: 5px;
+}
+
+.todo_layout form button {
+    background-color: #54b4d3;
+    border: 1px solid #54b4d3;
+    color: white;
+    border-radius: 5px;
+}
+
+.todo_layout form input {
+    flex: 1;
+    outline: none;
+    border: 1px solid #9898985e;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.btn_add {
+    padding: 5px;
+}
+
+.all_content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.all_content ul li {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.active {
+    color: #3b71ca;
+    border-bottom: 2px solid #3b71ca;
+}
