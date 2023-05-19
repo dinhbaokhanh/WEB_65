@@ -1,5 +1,9 @@
-const Header = ({numUndone}) => {
-    return <div className="header">You have {numUndone} tasks left!</div>;
+const Header = ({numUndone}, props) => {
+    return (
+        <div className="header">
+            {props.language === 'us' ? `You have ${numUndone} tasks left!` : `Còn ${numUndone} việc còn lại`}
+        </div>
+    );
 };
   
 export default Header;

@@ -20,6 +20,7 @@ const Home = () => {
 
   const [todos, setTodos] = useState([]);
   const [numUndone, setNumUndone] = useState(0);
+  const [language, setLanguage] = useState("us");
 
   useEffect(() => {
     setNumUndone(todos.filter((todo) => !todo.done).length);
@@ -44,14 +45,18 @@ const Home = () => {
     localStorage.setItem('todos', JSON.stringify([...todos]));
   };
 
+  const changeLanguage = () => {
+    setLanguage(language === 'us' ? 'vn' : 'us');
+  }
+
   return (
     <div className="App">
       <div className="container">
-        <TodoListHeader numUndone={numUndone}/>
-        <TodoList todos={todos} toggleCompleted={toggleCompleted}/>
-        <Form addTodo={addTodo}/>
+        <TodoListHeader language={language} numUndone={numUndone}/>
+        <TodoList language={language} todos={todos} toggleCompleted={toggleCompleted}/>
+        <Form language={language} addTodo={addTodo}/>
       </div>
-      <Footer />
+      <Footer language={language} onLanguageChange={changeLanguage}/>
     </div>
   );
 };

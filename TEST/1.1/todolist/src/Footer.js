@@ -1,19 +1,23 @@
 import React from "react";
 
-const Footer = ({ currentLanguage, setLanguage }) => {
-  const handleLanguage = (e) => {
-    setLanguage(e.target.value);
-  };
-
+const Footer = (props) => {
     return (
       <div>
         <h3>Made by MindX 🔥</h3>
-        <div value={currentLanguage} onClick={handleLanguage}>
-            <span>Available on:</span>
-            <span className="languague-picker" value="vn">🇻🇳</span>
-            <span className="languague-picker selected" value="us">🇺🇸</span>
+        <div>
+          <span>Available on:</span>
+          <span 
+          className={`language-picker ${props.language === "vn" ? "selected" : " "}`}
+          onClick={() => props.onLanguageChange('vn')}>
+            🇻🇳
+          </span>
+          <span 
+          className={`language-picker ${props.language === "us" ? "selected" : " "}`}
+          onClick={() => props.onLanguageChange('us')}>
+            🇺🇸
+          </span>
         </div>
-      </div>
+      </div> 
     );
 };
   

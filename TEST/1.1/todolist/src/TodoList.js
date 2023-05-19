@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import qs from 'query-string'
 
-const TodoList = ({todos, toggleCompleted}) => {
+const TodoList = ({todos, toggleCompleted}, props) => {
   const [showNotFinishedOnly, setShowNotFinishedOnly] = useState(false);
   const params = qs.parse(window.location.search);
   const show = params.withDone === '1';
@@ -38,7 +38,8 @@ const TodoList = ({todos, toggleCompleted}) => {
         ))}
       </div>
       <label style={{marginLeft: 10}}>
-        <input type="checkbox" checked={showNotFinishedOnly} onChange={handleCheck}/> Not finished only
+        <input type="checkbox" checked={showNotFinishedOnly} onChange={handleCheck}/> 
+        {props.language === 'us' ? 'Not finished only' : 'Các việc chưa xong'}
       </label>
     </>
     

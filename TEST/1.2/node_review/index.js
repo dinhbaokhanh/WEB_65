@@ -1,52 +1,93 @@
-const express = require('express');
-const jwt = require('jsonwebtoken')
-const MongoClient = require('mongodb').MongoClient;
-
+const express = require("express");
+const { connectToDb, db } = require("./db");
 const app = express();
-const url = 'mongodb://127.0.0.1:27017/TEST';
+const jwt = require("jsonwebtoken");
 
-app.use(express.json());
-// Câu 1 em import thủ công ạ :>>
-
-app.get('/products', (req, res) => {
-  MongoClient.connect(url, (err, client) => {
-    const db = client.db('TEST');
-    const inventories = db.collection('inventories');
-    try {
-      inventories.find().toArray((err, result) => {
-      res.send(result);
-      client.close();
-    });
-    } catch (error) {
-      res.status(500).send({
-        message: error.message
-      })
-    }
-  });
+app.listen(3000, () => {
+  console.log("App is running at 3000");
+  connectToDb();
 });
+// B2.
+// app.get("/inventories", async (req, res) => {
+//   try {
+//     const inventories = await db.inventories.find().toArray();
+//     res.json(inventories);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ 
+//       message: "Error" 
+//     });
+//   }
+// });
 
-app.get('/products/:quantity', (req, res) => {
-  const db = client.db('TEST');
-  const inventories = db.collection('inventories');
-  const quantity = Number(req.params.quantity);
-  const query = {quantity: {$lt: quantity}};
-  MongoClient.connect(url, (err, client) => {
-    try {
-      if (err) throw err;
-      inventories.find(query).toArray(function(err, result) {
-        if (err) throw err;
-        res.send(result);
-        client.close();
-      });
-    } catch (error) {
-      res.status(500).send({
-        message: error.message
-      })
-    }
-  });
-});
+// B3.
+// app.get("/inventories", async (req, res) => {
+//   try {
+//     const query = req.query.lowQuantity ? { instock: { $lt: 100 } } : {};
+//     const inventories = await db.inventories.find(query).toArray(); 
+//     res.json(inventories);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ 
+//       message: "Error" 
+//     });
+//   }
+// });
 
+// B4 + B5
+// const verifyToken = (req, res, next) => {
+//   const token = req.headers.authorization;
+//   if (!token) {
+//     return res.status(401).json({ message: "Missing token" });
+//   }
+//   try {
+//     const decoded = jwt.verify(token, "key");
+//     req.userId = decoded.userId;
+//     next();
+//   } catch (err) {
+//     res.status(401).json({ 
+//       message: "Invalid token" 
+//     });
+//   }
+// };
 
-app.listen(3000, function() {
-  console.log('Server is listening on port 3000');
-});
+// app.post("/login", (req, res) => {
+//   const { username, password } = req.body;
+//   db.users.findOne({ username, password }, (err, user) => {
+//     if (user) {
+//       const token = jwt.sign({ userId: user._id }, "key");
+//       res.json({ token });
+//     } else {
+//       res.status(401).json({ 
+//         message: "Invalid" 
+//       });
+//     }
+//   });
+// });
+
+// app.get("/inventory", verifyToken, (req, res) => {
+//   db.inventories.find().toArray((err, inventories) => {
+//     res.json(inventories);
+//   });
+// });
+
+// B6
+// app.get('/orders', async (req, res) => {
+//   try {
+//     const orders = await db.collection('orders').find().toArray();
+//     const result = [];
+//     for (let order of orders) {
+//       const product = await db.collection('inventories').findOne({ item: order.item });
+//       result.push({
+//         ...order,
+//         description: product.description,
+//       });
+//     }
+//     res.json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ 
+//       message: 'Error' 
+//     });
+//   }
+// });

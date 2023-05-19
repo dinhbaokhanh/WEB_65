@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
-import User from '../../../../models/User';
+import User from '../../../../models/User.js';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import db from '../db';
+import db from '../db.js';
 import bcryptjs from 'bcryptjs'
 
 export default NextAuth({
@@ -16,7 +16,7 @@ export default NextAuth({
         },
         async session({ session, token }) {
             if (token?._id) session.user._id = token._id;
-            if (token?.isAdmin) session.isAdmin = token.isAdmin;
+            if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
             return session;
         },
     },

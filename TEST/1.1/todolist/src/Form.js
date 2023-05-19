@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Form = ({ addTodo }) => {
+const Form = ({ addTodo }, props) => {
 
     const [newTodo, setNewTodo] = useState('');
     const [dueDate, setdueDate] = useState('');
@@ -21,13 +21,17 @@ const Form = ({ addTodo }) => {
     return (
         <form className="form" onClick={handleSubmit}>
             <input 
-            placeholder="Enter task ..." 
+            placeholder={
+                props.language === 'us' ? 'Enter tasks ... ' : 'Nhập việc cần làm ...'
+            }
             value={newTodo} 
             onChange={(e) => setNewTodo(e.target.value)} />
             <input 
-            placeholder="Due date" 
+            placeholder={
+                props.language === 'us' ? 'Due date ' : 'Ngày đến hạn'
+            }
             onChange={(e) => setdueDate(e.target.value)} />
-            <button>Submit</button>
+            <button>{ props.language === 'us' ? 'Submit' : 'Bấm' }</button>
         </form>
     );
 };

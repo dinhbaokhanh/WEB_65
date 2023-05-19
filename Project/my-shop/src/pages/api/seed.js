@@ -8,7 +8,7 @@ const handler = async (req, res) => {
     await db.disconnect();
     res.send({
         message: 'Success'
-    })
+    });
 }
 
 export default handler;
